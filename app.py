@@ -1,8 +1,9 @@
 from typing import Container
 from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify, send_file
 import os
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+basedir = os.path.abspath(os.path.dirname(__file__))
 db_path = os.path.join(basedir, 'users.db')
+upload_path = os.path.join(basedir, 'uploads')
 import joblib
 import numpy as np
 import pandas as pd
