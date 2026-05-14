@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assessment Results - Cervical Cancer Detection</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-pink-50 via-purple-50 to-white min-h-screen">
+    
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="/detection" class="flex items-center gap-3">
+                <i class="bi bi-hospital-fill text-3xl bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent"></i>
+                <span class="text-2xl font-bold text-gray-800">Cervical Cancer Assessment</span>
+            </a>
+            <div class="flex items-center gap-6">
+                <span class="text-gray-600">Welcome, <strong>{{ session.username }}</strong></span>
+                <a href="/logout" class="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600 transition-all">
+                    <i class="bi bi-box-arrow-right"></i> Logout
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-6 py-12">
+        
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <div class="inline-block bg-green-100 p-4 rounded-full mb-4">
+                <i class="bi bi-check-circle-fill text-6xl text-green-600"></i>
+            </div>
+            <h1 class="text-5xl font-bold text-gray-800 mb-4">Assessment Complete</h1>
+            <p class="text-xl text-gray-600">Your cervical cancer risk analysis results</p>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+            
+            <!-- Low Risk Result Card -->
+            <div class="bg-white rounded-3xl shadow-xl border-4 border-green-500 overflow-hidden mb-8">
+                <div class="bg-gradient-to-r from-green-500 to-green-600 text-white p-8">
+                    <h3 class="text-3xl font-bold flex items-center gap-3">
+                        <i class="bi bi-check-circle-fill"></i>
+                        Low Risk Detected
+                    </h3>
+                </div>
+                
+                <div class="p-8">
+                    <div class="bg-green-50 border-2 border-green-200 rounded-xl p-6 mb-6">
+                        <h4 class="text-2xl font-bold text-green-800 mb-3">Good News!</h4>
+                        <p class="text-green-700 text-lg mb-4">Based on the provided information, the AI model has assessed your cervical cancer risk as <strong>LOW</strong>.</p>
+                        <hr class="border-green-300 my-4">
+                        <p class="text-green-800 text-xl">
+                            <strong>Risk Probability:</strong> 
+                            <span class="text-3xl font-bold">{{ "%.2f"|format(session.probability * 100) }}%</span>
+                        </p>
+                    </div>
+
+                    <!-- Input Summary -->
+                    <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 mb-6">
+                        <h5 class="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                            <i class="bi bi-clipboard-data-fill text-pink-500"></i>
+                            Your Input Summary
+                        </h5>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-700"><strong>Age:</strong></span>
+                                    <span class="text-gray-800 font-semibold">{{ session.user_input.Age|int }} years</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-700"><strong>Schiller Test:</strong></span>
+                                    <span class="text-gray-800 font-semibold">{{ 'Positive' if session.user_input.Schiller == 1 else 'Negative' }}</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-700"><strong>Citology:</strong></span>
+                                    <span class="text-gray-800 font-semibold">{{ 'Positive' if session.user_input.Citology == 1 else 'Negative' }}</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-700"><strong>Dx:CIN:</strong></span>
+                                    <span class="text-gray-800 font-semibold">{{ 'Yes' if session.user_input['Dx:CIN'] == 1 else 'No' }}</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-700"><strong>Genital Herpes:</strong></span>
+                                    <span class="text-gray-800 font-semibold">{{ 'Yes' if session.user_input['STDs:genital herpes'] == 1 else 'No' }}</span>
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-700"><strong>STDs:</strong></span>
+                                    <span class="text-gray-800 font-semibold">{{ session.user_input['STDs (number)']|int }}</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-700"><strong>Sexual Partners:</strong></span>
+                                    <span class="text-gray-800 font-semibold">{{ session.user_input['Number of sexual partners']|int }}</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-700"><strong>First Intercourse Age:</strong></span>
+                                    <span class="text-gray-800 font-semibold">{{ session.user_input['First sexual intercourse']|int }} years</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-700"><strong>Pregnancies:</strong></span>
+                                    <span class="text-gray-800 font-semibold">{{ session.user_input['Num of pregnancies']|int }}</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-700"><strong>Smoking:</strong></span>
+                                    <span class="text-gray-800 font-semibold">{{ session.user_input['Smokes (packs/year)']|int }} packs/year</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SHAP Analysis -->
+                    <div class="bg-white border-4 border-purple-300 rounded-xl overflow-hidden mb-6">
+                        <div class="bg-gradient-to-r from-purple-500 to-purple-600 text-white p-6">
+                            <h5 class="text-2xl font-bold flex items-center gap-2">
+                                <i class="bi bi-bar-chart-fill"></i>
+                                Feature Impact Analysis (SHAP)
+                            </h5>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-gray-600 mb-4">This chart shows how each factor contributed to your risk assessment:</p>
+                            <img src="data:image/png;base64,{{ session.shap_plot }}" alt="SHAP Analysis" class="w-full rounded-xl shadow-lg">
+                            
+                            <div class="bg-blue-50 border-2 border-blue-200 rounded-xl p-4 mt-4">
+                                <p class="text-sm text-blue-800">
+                                    <strong>How to read this chart:</strong><br>
+                                    • Blue bars push the prediction toward LOW RISK<br>
+                                    • Red bars push the prediction toward HIGH RISK<br>
+                                    • Longer bars = stronger influence on the prediction
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recommendations -->
+                    <div class="bg-white border-4 border-blue-300 rounded-xl overflow-hidden mb-6">
+                        <div class="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-6">
+                            <h5 class="text-2xl font-bold flex items-center gap-2">
+                                <i class="bi bi-lightbulb-fill"></i>
+                                Recommendations
+                            </h5>
+                        </div>
+                        <div class="p-6">
+                            <ul class="space-y-3 text-gray-700">
+                                <li class="flex items-start gap-3">
+                                    <i class="bi bi-check-circle-fill text-blue-500 mt-1"></i>
+                                    <span>Continue with regular cervical cancer screenings as recommended by your healthcare provider</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="bi bi-check-circle-fill text-blue-500 mt-1"></i>
+                                    <span>Maintain a healthy lifestyle with balanced diet and regular exercise</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="bi bi-check-circle-fill text-blue-500 mt-1"></i>
+                                    <span>Attend routine gynecological check-ups</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="bi bi-check-circle-fill text-blue-500 mt-1"></i>
+                                    <span>Stay informed about HPV vaccination if applicable</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="bi bi-check-circle-fill text-blue-500 mt-1"></i>
+                                    <span>Report any unusual symptoms to your doctor immediately</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Medical Disclaimer -->
+                    <div class="bg-yellow-50 border-2 border-yellow-300 rounded-xl p-6 mb-6">
+                        <h6 class="text-yellow-800 font-bold mb-2 flex items-center gap-2">
+                            <i class="bi bi-exclamation-triangle-fill"></i>
+                            Important Medical Disclaimer
+                        </h6>
+                        <p class="text-yellow-700">
+                            This AI-powered assessment is for educational and informational purposes only. It is <strong>NOT</strong> a substitute for professional medical diagnosis. Please consult with qualified healthcare professionals for proper medical evaluation and advice.
+                        </p>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <a href="/download_report" class="bg-gradient-to-r from-pink-500 to-purple-500 text-white font-bold py-4 rounded-xl hover:shadow-lg transition-all text-center flex items-center justify-center gap-2">
+                            <i class="bi bi-file-earmark-pdf-fill"></i>
+                            Download Report
+                        </a>
+                        <a href="/detection" class="bg-white border-2 border-purple-500 text-purple-500 font-bold py-4 rounded-xl hover:bg-purple-50 transition-all text-center flex items-center justify-center gap-2">
+                            <i class="bi bi-arrow-repeat"></i>
+                            New Assessment
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Resources -->
+            <div class="bg-white rounded-3xl shadow-xl p-8">
+                <h5 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+                    <i class="bi bi-book-fill text-pink-500"></i>
+                    Additional Resources
+                </h5>
+                <div class="space-y-3">
+                    <a href="https://www.cancer.org/cancer/cervical-cancer.html" target="_blank" class="flex items-center gap-3 p-4 bg-gradient-to-r from-pink-50 to-purple-50 rounded-xl hover:shadow-md transition-all group">
+                        <i class="bi bi-arrow-right-circle-fill text-2xl text-pink-500 group-hover:text-purple-500 transition-colors"></i>
+                        <span class="text-gray-700 group-hover:text-gray-900 font-semibold">American Cancer Society - Cervical Cancer Information</span>
+                    </a>
+                    <a href="https://www.who.int/news-room/fact-sheets/detail/cervical-cancer" target="_blank" class="flex items-center gap-3 p-4 bg-gradient-to-r from-pink-50 to-purple-50 rounded-xl hover:shadow-md transition-all group">
+                        <i class="bi bi-arrow-right-circle-fill text-2xl text-pink-500 group-hover:text-purple-500 transition-colors"></i>
+                        <span class="text-gray-700 group-hover:text-gray-900 font-semibold">WHO - Cervical Cancer Fact Sheet</span>
+                    </a>
+                    <a href="https://www.cancer.gov/types/cervical" target="_blank" class="flex items-center gap-3 p-4 bg-gradient-to-r from-pink-50 to-purple-50 rounded-xl hover:shadow-md transition-all group">
+                        <i class="bi bi-arrow-right-circle-fill text-2xl text-pink-500 group-hover:text-purple-500 transition-colors"></i>
+                        <span class="text-gray-700 group-hover:text-gray-900 font-semibold">National Cancer Institute - Cervical Cancer</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cervical Cancer Detection - Sign Up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #fce7f3 0%, #ddd6fe 50%, #fff 100%);
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen flex items-center justify-center p-6">
+    
+    <div class="w-full max-w-6xl bg-white rounded-3xl shadow-2xl overflow-hidden grid md:grid-cols-2">
+        
+        <!-- Left Side - Info Panel -->
+        <div class="bg-gradient-to-br from-pink-500 to-purple-500 p-12 flex flex-col justify-center items-center text-white relative overflow-hidden order-2 md:order-1">
+            <div class="absolute inset-0 opacity-10">
+                <div class="absolute top-10 left-10 w-32 h-32 bg-white rounded-full"></div>
+                <div class="absolute bottom-10 right-10 w-40 h-40 bg-white rounded-full"></div>
+                <div class="absolute top-1/2 left-1/3 w-24 h-24 bg-white rounded-full"></div>
+            </div>
+            
+            <div class="relative z-10 text-center">
+                <i class="bi bi-person-plus-fill text-8xl mb-6"></i>
+                <h3 class="text-4xl font-bold mb-4">Join Us Today</h3>
+                <p class="text-lg opacity-90 mb-8">Create an account to access AI-powered cervical cancer risk assessment</p>
+                
+                <div class="space-y-4 text-left">
+                    <div class="flex items-start gap-3">
+                        <i class="bi bi-check-circle-fill text-2xl mt-1"></i>
+                        <div>
+                            <h4 class="font-bold">Instant Analysis</h4>
+                            <p class="text-sm opacity-80">Upload and get results in seconds</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i class="bi bi-check-circle-fill text-2xl mt-1"></i>
+                        <div>
+                            <h4 class="font-bold">AI Recommendations</h4>
+                            <p class="text-sm opacity-80">Machine learning powered insights</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i class="bi bi-check-circle-fill text-2xl mt-1"></i>
+                        <div>
+                            <h4 class="font-bold">Secure & Private</h4>
+                            <p class="text-sm opacity-80">Your data is safe with us</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side - Signup Form -->
+        <div class="p-12 order-1 md:order-2 overflow-y-auto max-h-screen">
+            <div class="mb-8">
+                <a href="/" class="text-3xl font-bold bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">
+                    <i class="bi bi-hospital-fill"></i> Cervical Cancer Detection
+                </a>
+            </div>
+
+            <h2 class="text-4xl font-bold text-gray-800 mb-3">Create Account</h2>
+            <p class="text-gray-600 mb-8">Join our cervical cancer risk assessment system</p>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="{% if category == 'success' %}bg-green-50 border-green-200 text-green-700{% else %}bg-red-50 border-red-200 text-red-700{% endif %} border-2 rounded-xl p-4 mb-6">
+                            <p class="font-semibold flex items-center gap-2">
+                                <i class="bi {% if category == 'success' %}bi-check-circle-fill{% else %}bi-exclamation-circle-fill{% endif %}"></i>
+                                {{ message }}
+                            </p>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <form action="/signup" method="post" id="signupForm" class="space-y-5">
+                <!-- Name Fields -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">First Name</label>
+                        <input 
+                            type="text" 
+                            id="firstName"
+                            name="first_name" 
+                            required
+                            class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-pink-500 focus:outline-none"
+                            placeholder="First name"
+                        >
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">Last Name</label>
+                        <input 
+                            type="text" 
+                            id="lastName"
+                            name="last_name" 
+                            required
+                            class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-pink-500 focus:outline-none"
+                            placeholder="Last name"
+                        >
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-2">Email Address</label>
+                    <div class="relative">
+                        <i class="bi bi-envelope-fill absolute left-4 top-4 text-gray-400"></i>
+                        <input 
+                            type="email" 
+                            id="email"
+                            name="email" 
+                            required
+                            class="w-full pl-12 pr-4 py-3 border-2 border-gray-300 rounded-xl focus:border-pink-500 focus:outline-none"
+                            placeholder="Enter your email"
+                        >
+                    </div>
+                    <p class="text-gray-500 text-xs mt-1">We'll never share your email with anyone else.</p>
+                </div>
+
+                <!-- Username -->
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-2">Username</label>
+                    <div class="relative">
+                        <i class="bi bi-person-fill absolute left-4 top-4 text-gray-400"></i>
+                        <input 
+                            type="text" 
+                            id="username"
+                            name="username" 
+                            required
+                            minlength="4"
+                            class="w-full pl-12 pr-4 py-3 border-2 border-gray-300 rounded-xl focus:border-pink-500 focus:outline-none"
+                            placeholder="Choose a username"
+                        >
+                    </div>
+                    <p class="text-gray-500 text-xs mt-1">At least 4 characters long.</p>
+                </div>
+
+                <!-- Password Fields -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">Password</label>
+                        <div class="relative">
+                            <i class="bi bi-lock-fill absolute left-4 top-4 text-gray-400"></i>
+                            <input 
+                                type="password" 
+                                id="password"
+                                name="password" 
+                                required
+                                minlength="6"
+                                class="w-full pl-12 pr-4 py-3 border-2 border-gray-300 rounded-xl focus:border-pink-500 focus:outline-none"
+                                placeholder="Password"
+                            >
+                        </div>
+                        <p class="text-gray-500 text-xs mt-1">At least 6 characters long.</p>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">Confirm Password</label>
+                        <div class="relative">
+                            <i class="bi bi-lock-fill absolute left-4 top-4 text-gray-400"></i>
+                            <input 
+                                type="password" 
+                                id="confirmPassword"
+                                name="confirm_password" 
+                                required
+                                class="w-full pl-12 pr-4 py-3 border-2 border-gray-300 rounded-xl focus:border-pink-500 focus:outline-none"
+                                placeholder="Confirm"
+                            >
+                        </div>
+                        <p id="passwordMatch" class="text-gray-500 text-xs mt-1"></p>
+                    </div>
+                </div>
+
+                <!-- Age Range -->
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-2">Age Range</label>
+                    <select 
+                        id="age"
+                        name="age" 
+                        required
+                        class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-pink-500 focus:outline-none"
+                    >
+                        <option value="">Select Age Range</option>
+                        <option value="18-25">18-25</option>
+                        <option value="26-35">26-35</option>
+                        <option value="36-45">36-45</option>
+                        <option value="46-55">46-55</option>
+                        <option value="56-65">56-65</option>
+                        <option value="65+">65+</option>
+                    </select>
+                </div>
+
+                <!-- Purpose -->
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-2">Primary Purpose</label>
+                    <select 
+                        id="purpose"
+                        name="purpose" 
+                        required
+                        class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-pink-500 focus:outline-none"
+                    >
+                        <option value="">Select Purpose</option>
+                        <option value="personal">Personal Health Monitoring</option>
+                        <option value="research">Research/Educational</option>
+                        <option value="healthcare">Healthcare Professional</option>
+                        <option value="student">Medical Student</option>
+                    </select>
+                </div>
+
+                <!-- Checkboxes -->
+                <div class="space-y-3">
+                    <label class="flex items-start">
+                        <input type="checkbox" id="agreeTerms" name="agree_terms" required class="w-4 h-4 mt-1 text-pink-500 border-gray-300 rounded">
+                        <span class="ml-2 text-gray-600 text-sm">
+                            I agree to the <button type="button" onclick="document.getElementById('termsModal').classList.remove('hidden')" class="text-pink-500 hover:text-pink-600 font-semibold">Terms of Service</button> and <button type="button" onclick="document.getElementById('privacyModal').classList.remove('hidden')" class="text-pink-500 hover:text-pink-600 font-semibold">Privacy Policy</button>
+                        </span>
+                    </label>
+
+                    <label class="flex items-start">
+                        <input type="checkbox" id="medicalDisclaimer" name="medical_disclaimer" required class="w-4 h-4 mt-1 text-pink-500 border-gray-300 rounded">
+                        <span class="ml-2 text-gray-600 text-sm">
+                            I understand this tool is for educational purposes only and does not replace professional medical diagnosis
+                        </span>
+                    </label>
+                </div>
+
+                <button 
+                    type="submit" 
+                    id="signupBtn"
+                    class="w-full bg-gradient-to-r from-pink-500 to-purple-500 text-white font-bold py-4 rounded-xl hover:shadow-lg transition-all"
+                >
+                    Create Account
+                </button>
+            </form>
+
+            <div class="mt-8 text-center">
+                <p class="text-gray-600">
+                    Already have an account? 
+                    <a href="/login" class="text-pink-500 hover:text-pink-600 font-semibold">Login here</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms Modal -->
+    <div id="termsModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-6 z-50">
+        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[80vh] overflow-hidden">
+            <div class="bg-gradient-to-r from-pink-500 to-purple-500 p-6 flex items-center justify-between">
+                <h5 class="text-2xl font-bold text-white">Terms of Service</h5>
+                <button type="button" onclick="document.getElementById('termsModal').classList.add('hidden')" class="text-white hover:text-gray-200">
+                    <i class="bi bi-x-lg text-2xl"></i>
+                </button>
+            </div>
+            <div class="p-6 overflow-y-auto max-h-[60vh]">
+                <h6 class="font-bold text-gray-800 mb-2">1. Educational Purpose</h6>
+                <p class="text-gray-600 mb-4">Cervical Cancer Risk Assessment System is designed for educational and research purposes only. It is not intended for medical diagnosis or treatment.</p>
+                
+                <h6 class="font-bold text-gray-800 mb-2">2. No Medical Advice</h6>
+                <p class="text-gray-600 mb-4">This application does not provide medical advice. Always consult qualified healthcare professionals for medical concerns.</p>
+                
+                <h6 class="font-bold text-gray-800 mb-2">3. Data Usage</h6>
+                <p class="text-gray-600 mb-4">Uploaded images and data may be used for improving the AI model. No personal identifying information is stored with images.</p>
+                
+                <h6 class="font-bold text-gray-800 mb-2">4. Accuracy Disclaimer</h6>
+                <p class="text-gray-600 mb-4">While we strive for accuracy, the AI model is not 100% accurate and should not be relied upon for medical decisions.</p>
+                
+                <h6 class="font-bold text-gray-800 mb-2">5. User Responsibility</h6>
+                <p class="text-gray-600 mb-4">Users are responsible for using this tool appropriately and seeking professional medical care when needed.</p>
+            </div>
+            <div class="p-6 border-t border-gray-200">
+                <button type="button" onclick="document.getElementById('termsModal').classList.add('hidden')" class="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition-all">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Privacy Modal -->
+    <div id="privacyModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-6 z-50">
+        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[80vh] overflow-hidden">
+            <div class="bg-gradient-to-r from-pink-500 to-purple-500 p-6 flex items-center justify-between">
+                <h5 class="text-2xl font-bold text-white">Privacy Policy</h5>
+                <button type="button" onclick="document.getElementById('privacyModal').classList.add('hidden')" class="text-white hover:text-gray-200">
+                    <i class="bi bi-x-lg text-2xl"></i>
+                </button>
+            </div>
+            <div class="p-6 overflow-y-auto max-h-[60vh]">
+                <h6 class="font-bold text-gray-800 mb-2">Information We Collect</h6>
+                <p class="text-gray-600 mb-4">We collect basic account information (name, email, username) and medical data for analysis.</p>
+                
+                <h6 class="font-bold text-gray-800 mb-2">How We Use Information</h6>
+                <p class="text-gray-600 mb-4">Your information is used to provide the risk assessment service and improve our AI models.</p>
+                
+                <h6 class="font-bold text-gray-800 mb-2">Data Security</h6>
+                <p class="text-gray-600 mb-4">We implement security measures to protect your personal information and uploaded data.</p>
+                
+                <h6 class="font-bold text-gray-800 mb-2">Data Retention</h6>
+                <p class="text-gray-600 mb-4">Images are automatically deleted after analysis. Account information is retained until account deletion.</p>
+                
+                <h6 class="font-bold text-gray-800 mb-2">Third Party Sharing</h6>
+                <p class="text-gray-600 mb-4">We do not share personal information with third parties except as required by law.</p>
+            </div>
+            <div class="p-6 border-t border-gray-200">
+                <button type="button" onclick="document.getElementById('privacyModal').classList.add('hidden')" class="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition-all">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,305 @@
+/* ============================================
+   Cervical Cancer Risk Assessment - Styles
+   Light Medical Theme
+   ============================================ */
+
+/* Color Palette */
+:root {
+    --primary-color: #4A90E2;
+    --secondary-color: #7B68EE;
+    --success-color: #5CB85C;
+    --danger-color: #E74C3C;
+    --warning-color: #F39C12;
+    --info-color: #3498DB;
+    
+    --bg-gradient-start: #E3F2FD;
+    --bg-gradient-end: #FCE4EC;
+    
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --text-muted: #999999;
+    
+    --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --card-shadow-hover: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Background Gradient */
+.bg-gradient {
+    background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+    min-height: 100vh;
+}
+
+/* Body Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-primary);
+}
+
+/* Medical Icons */
+.medical-icon {
+    font-size: 3rem;
+}
+
+.medical-icon-sm {
+    font-size: 1.5rem;
+}
+
+/* Card Styles */
+.card {
+    border-radius: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--card-shadow-hover);
+}
+
+.card-header {
+    border-radius: 15px 15px 0 0 !important;
+    padding: 1.5rem;
+}
+
+/* Custom Primary Button */
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(74, 144, 226, 0.3);
+}
+
+/* Form Controls */
+.form-control, .form-select {
+    border-radius: 10px;
+    border: 2px solid #E0E0E0;
+    padding: 0.75rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(74, 144, 226, 0.15);
+}
+
+/* Number Spinner Buttons */
+.input-group .btn {
+    border-radius: 10px;
+    font-weight: bold;
+    min-width: 45px;
+}
+
+.input-group .form-control {
+    border-left: 2px solid #E0E0E0;
+    border-right: 2px solid #E0E0E0;
+    border-radius: 0;
+}
+
+.input-group .form-control:first-child {
+    border-radius: 10px 0 0 10px;
+}
+
+.input-group .form-control:last-child {
+    border-radius: 0 10px 10px 0;
+}
+
+/* Radio Button Groups (for Yes/No options) */
+.btn-group .btn-outline-success.active {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.btn-group .btn-outline-danger.active {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.btn-group .btn-outline-warning.active {
+    background-color: var(--warning-color);
+    color: white;
+}
+
+/* Range Slider (for smoking) */
+.form-range {
+    height: 8px;
+    border-radius: 10px;
+}
+
+.form-range::-webkit-slider-thumb {
+    width: 20px;
+    height: 20px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.form-range::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Section Headers */
+.section-header {
+    border-left: 4px solid var(--primary-color);
+    padding-left: 1rem;
+    margin-bottom: 1.5rem;
+    margin-top: 2rem;
+}
+
+.section-header:first-child {
+    margin-top: 0;
+}
+
+/* Alert Styles */
+.alert {
+    border-radius: 10px;
+    border-left: 4px solid;
+}
+
+.alert-success {
+    border-left-color: var(--success-color);
+    background-color: #D4EDDA;
+}
+
+.alert-danger {
+    border-left-color: var(--danger-color);
+    background-color: #F8D7DA;
+}
+
+.alert-warning {
+    border-left-color: var(--warning-color);
+    background-color: #FFF3CD;
+}
+
+.alert-info {
+    border-left-color: var(--info-color);
+    background-color: #D1ECF1;
+}
+
+/* Background Light Warning */
+.bg-light-warning {
+    background-color: #FFF9E6 !important;
+}
+
+/* Navbar */
+.navbar {
+    border-bottom: 3px solid var(--primary-color);
+}
+
+/* Modal Styles */
+.modal-content {
+    border-radius: 15px;
+}
+
+.modal-header {
+    border-radius: 15px 15px 0 0;
+}
+
+/* Spinner Animation */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.spinner-border {
+    animation: spin 1s linear infinite;
+}
+
+/* Image Styles */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.img-fluid {
+    border-radius: 10px;
+}
+
+/* Shadow Effects */
+.shadow-lg {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+.shadow-sm {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .medical-icon {
+        font-size: 2rem;
+    }
+    
+    .card-body {
+        padding: 1.5rem !important;
+    }
+    
+    .section-header h5 {
+        font-size: 1.1rem;
+    }
+}
+
+/* Loading State */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Success Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+}
+
+/* Print Styles */
+@media print {
+    .navbar, .btn, .alert-dismissible .btn-close {
+        display: none !important;
+    }
+    
+    .card {
+        box-shadow: none !important;
+        border: 1px solid #ddd !important;
+    }
+    
+    body {
+        background: white !important;
+    }
+}

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cervical Cancer Risk Assessment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-pink-50 via-purple-50 to-white min-h-screen">
+    
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <i class="bi bi-hospital-fill text-3xl bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent"></i>
+                <span class="text-2xl font-bold text-gray-800">Cervical Cancer Assessment</span>
+            </div>
+            <div class="flex items-center gap-6">
+                <span class="text-gray-600">Welcome, <strong>{{ session.username }}</strong></span>
+                <a href="/logout" class="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600 transition-all">
+                    <i class="bi bi-box-arrow-right"></i> Logout
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-6 py-12">
+        
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-5xl font-bold text-gray-800 mb-4">Risk Assessment Analysis</h1>
+            <p class="text-xl text-gray-600">Complete the form below for AI-powered cervical cancer risk evaluation</p>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+            
+            <!-- Main Assessment Form -->
+            <div class="bg-white rounded-3xl shadow-xl p-8 mb-8">
+                <div class="bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded-2xl p-6 mb-6">
+                    <h4 class="text-2xl font-bold mb-1 flex items-center gap-2">
+                        <i class="bi bi-clipboard2-pulse-fill"></i>
+                        Patient Risk Assessment Form
+                    </h4>
+                    <p class="text-sm opacity-90">Complete all fields for accurate analysis</p>
+                </div>
+
+                <form id="assessmentForm" class="space-y-8">
+                    
+                    <!-- Patient Information Section -->
+                    <div>
+                        <h5 class="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                            <i class="bi bi-person-fill text-pink-500"></i>
+                            Patient Information
+                        </h5>
+                        
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Age (years)</label>
+                            <div class="flex items-center gap-2">
+                                <button type="button" onclick="decrementValue('age', 13, 100)" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold px-4 py-3 rounded-lg transition-all">
+                                    <i class="bi bi-dash-lg"></i>
+                                </button>
+                                <input type="number" id="age" name="age" value="35" min="13" max="100" required
+                                    class="flex-1 text-center px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-pink-500 focus:outline-none font-bold text-lg">
+                                <button type="button" onclick="incrementValue('age', 13, 100)" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold px-4 py-3 rounded-lg transition-all">
+                                    <i class="bi bi-plus-lg"></i>
+                                </button>
+                                <span class="text-gray-600 font-semibold">years</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Medical Test Results Section -->
+                    <div>
+                        <h5 class="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                            <i class="bi bi-clipboard-data-fill text-pink-500"></i>
+                            Medical Test Results
+                        </h5>
+
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">Schiller Test</label>
+                                <div class="flex gap-2">
+                                    <input type="radio" name="schiller" id="schiller_pos" value="1" checked class="hidden peer/pos">
+                                    <label for="schiller_pos" class="flex-1 text-center px-4 py-3 border-2 border-green-300 bg-green-50 text-green-700 rounded-lg cursor-pointer peer-checked/pos:bg-green-500 peer-checked/pos:text-white peer-checked/pos:border-green-500 transition-all font-semibold">
+                                        Positive
+                                    </label>
+                                    
+                                    <input type="radio" name="schiller" id="schiller_neg" value="0" class="hidden peer/neg">
+                                    <label for="schiller_neg" class="flex-1 text-center px-4 py-3 border-2 border-red-300 bg-red-50 text-red-700 rounded-lg cursor-pointer peer-checked/neg:bg-red-500 peer-checked/neg:text-white peer-checked/neg:border-red-500 transition-all font-semibold">
+                                        Negative
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">Citology Test</label>
+                                <div class="flex gap-2">
+                                    <input type="radio" name="citology" id="citology_pos" value="1" class="hidden peer/pos">
+                                    <label for="citology_pos" class="flex-1 text-center px-4 py-3 border-2 border-green-300 bg-green-50 text-green-700 rounded-lg cursor-pointer peer-checked/pos:bg-green-500 peer-checked/pos:text-white peer-checked/pos:border-green-500 transition-all font-semibold">
+                                        Positive
+                                    </label>
+                                    
+                                    <input type="radio" name="citology" id="citology_neg" value="0" checked class="hidden peer/neg">
+                                    <label for="citology_neg" class="flex-1 text-center px-4 py-3 border-2 border-red-300 bg-red-50 text-red-700 rounded-lg cursor-pointer peer-checked/neg:bg-red-500 peer-checked/neg:text-white peer-checked/neg:border-red-500 transition-all font-semibold">
+                                        Negative
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">Dx:CIN</label>
+                                <div class="flex gap-2">
+                                    <input type="radio" name="dx_cin" id="dx_cin_yes" value="1" class="hidden peer/yes">
+                                    <label for="dx_cin_yes" class="flex-1 text-center px-4 py-3 border-2 border-green-300 bg-green-50 text-green-700 rounded-lg cursor-pointer peer-checked/yes:bg-green-500 peer-checked/yes:text-white peer-checked/yes:border-green-500 transition-all font-semibold">
+                                        Yes
+                                    </label>
+                                    
+                                    <input type="radio" name="dx_cin" id="dx_cin_no" value="0" checked class="hidden peer/no">
+                                    <label for="dx_cin_no" class="flex-1 text-center px-4 py-3 border-2 border-red-300 bg-red-50 text-red-700 rounded-lg cursor-pointer peer-checked/no:bg-red-500 peer-checked/no:text-white peer-checked/no:border-red-500 transition-all font-semibold">
+                                        No
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STD History Section -->
+                    <div>
+                        <h5 class="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                            <i class="bi bi-shield-fill-exclamation text-pink-500"></i>
+                            STD History
+                        </h5>
+
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">Genital Herpes</label>
+                                <div class="flex gap-2">
+                                    <input type="radio" name="genital_herpes" id="herpes_yes" value="1" class="hidden peer/yes">
+                                    <label for="herpes_yes" class="flex-1 text-center px-4 py-3 border-2 border-yellow-300 bg-yellow-50 text-yellow-700 rounded-lg cursor-pointer peer-checked/yes:bg-yellow-500 peer-checked/yes:text-white peer-checked/yes:border-yellow-500 transition-all font-semibold">
+                                        Yes
+                                    </label>
+                                    
+                                    <input type="radio" name="genital_herpes" id="herpes_no" value="0" checked class="hidden peer/no">
+                                    <label for="herpes_no" class="flex-1 text-center px-4 py-3 border-2 border-green-300 bg-green-50 text-green-700 rounded-lg cursor-pointer peer-checked/no:bg-green-500 peer-checked/no:text-white peer-checked/no:border-green-500 transition-all font-semibold">
+                                        No
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">Total Number of STDs</label>
+                                <div class="flex items-center gap-2">
+                                    <button type="button" onclick="decrementValue('stds_number', 0, 10)" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold px-4 py-3 rounded-lg transition-all">
+                                        <i class="bi bi-dash-lg"></i>
+                                    </button>
+                                    <input type="number" id="stds_number" name="stds_number" value="0" min="0" max="10" required
+                                        class="flex-1 text-center px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-pink-500 focus:outline-none font-bold text-lg">
+                                    <button type="button" onclick="incrementValue('stds_number', 0, 10)" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold px-4 py-3 rounded-lg transition-all">
+                                        <i class="bi bi-plus-lg"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sexual & Reproductive History Section -->
+                    <div>
+                        <h5 class="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                            <i class="bi bi-people-fill text-pink-500"></i>
+                            Sexual & Reproductive History
+                        </h5>
+
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">Sexual Partners</label>
+                                <div class="flex items-center gap-2">
+                                    <button type="button" onclick="decrementValue('sexual_partners', 1, 30)" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold px-3 py-3 rounded-lg transition-all">
+                                        <i class="bi bi-dash-lg"></i>
+                                    </button>
+                                    <input type="number" id="sexual_partners" name="sexual_partners" value="2" min="1" max="30" required
+                                        class="flex-1 text-center px-2 py-3 border-2 border-gray-300 rounded-xl focus:border-pink-500 focus:outline-none font-bold">
+                                    <button type="button" onclick="incrementValue('sexual_partners', 1, 30)" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold px-3 py-3 rounded-lg transition-all">
+                                        <i class="bi bi-plus-lg"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">First Intercourse Age</label>
+                                <div class="flex items-center gap-2">
+                                    <button type="button" onclick="decrementValue('first_intercourse', 10, 32)" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold px-3 py-3 rounded-lg transition-all">
+                                        <i class="bi bi-dash-lg"></i>
+                                    </button>
+                                    <input type="number" id="first_intercourse" name="first_intercourse" value="17" min="10" max="32" required
+                                        class="flex-1 text-center px-2 py-3 border-2 border-gray-300 rounded-xl focus:border-pink-500 focus:outline-none font-bold">
+                                    <button type="button" onclick="incrementValue('first_intercourse', 10, 32)" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold px-3 py-3 rounded-lg transition-all">
+                                        <i class="bi bi-plus-lg"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">Pregnancies</label>
+                                <div class="flex items-center gap-2">
+                                    <button type="button" onclick="decrementValue('pregnancies', 0, 11)" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold px-3 py-3 rounded-lg transition-all">
+                                        <i class="bi bi-dash-lg"></i>
+                                    </button>
+                                    <input type="number" id="pregnancies" name="pregnancies" value="2" min="0" max="11" required
+                                        class="flex-1 text-center px-2 py-3 border-2 border-gray-300 rounded-xl focus:border-pink-500 focus:outline-none font-bold">
+                                    <button type="button" onclick="incrementValue('pregnancies', 0, 11)" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold px-3 py-3 rounded-lg transition-all">
+                                        <i class="bi bi-plus-lg"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lifestyle Section -->
+                    <div>
+                        <h5 class="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                            <i class="bi bi-activity text-pink-500"></i>
+                            Lifestyle
+                        </h5>
+
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-3">Smoking (packs per year)</label>
+                            <input type="range" id="smoking" name="smoking" min="0" max="37" value="0" 
+                                oninput="document.getElementById('smokingValue').textContent = this.value"
+                                class="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-pink-500">
+                            <div class="flex justify-between items-center mt-2">
+                                <span class="text-sm text-gray-500">0 packs</span>
+                                <span class="text-xl font-bold text-pink-600"><span id="smokingValue">0</span> packs/year</span>
+                                <span class="text-sm text-gray-500">37 packs</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" id="analyzeBtn" class="w-full bg-gradient-to-r from-pink-500 to-purple-500 text-white font-bold py-4 rounded-xl hover:shadow-lg transition-all flex items-center justify-center gap-2">
+                        <span id="analyzeSpinner" class="hidden">
+                            <i class="bi bi-arrow-repeat animate-spin"></i>
+                        </span>
+                        <i class="bi bi-search"></i>
+                        Analyze Risk
+                    </button>
+                </form>
+            </div>
+
+            <!-- High Risk Results Section (Hidden initially) -->
+            <div id="highRiskSection" class="hidden">
+                <div class="bg-white rounded-3xl shadow-xl border-4 border-red-500 overflow-hidden mb-8">
+                    <div class="bg-gradient-to-r from-red-500 to-red-600 text-white p-6">
+                        <h4 class="text-2xl font-bold flex items-center gap-2">
+                            <i class="bi bi-exclamation-triangle-fill"></i>
+                            High Risk Detected
+                        </h4>
+                    </div>
+                    
+                    <div class="p-8">
+                        <div class="bg-red-50 border-2 border-red-200 rounded-xl p-6 mb-6">
+                            <p class="text-red-800 font-semibold text-lg">
+                                <strong>Risk Probability: <span id="riskProbability" class="text-2xl">0</span>%</strong>
+                            </p>
+                            <p class="text-red-700 mt-2">Further analysis required. Please upload a Pap smear image for detailed cell classification.</p>
+                        </div>
+
+                        <!-- SHAP Plot -->
+                        <div class="mb-6">
+                            <h5 class="text-xl font-bold text-gray-800 mb-3 flex items-center gap-2">
+                                <i class="bi bi-bar-chart-fill text-pink-500"></i>
+                                Feature Impact Analysis (SHAP)
+                            </h5>
+                            <img id="shapPlotHighRisk" src="" alt="SHAP Analysis" class="w-full rounded-xl shadow-lg">
+                        </div>
+
+                        <!-- Image Upload Section -->
+                        <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6">
+                            <h5 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                                <i class="bi bi-camera-fill text-purple-500"></i>
+                                Upload Pap Smear Image
+                            </h5>
+                            
+                            <form id="imageUploadForm" enctype="multipart/form-data" class="space-y-4">
+                                <div>
+                                    <input type="file" id="imageInput" name="image" accept="image/*" required
+                                        class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-pink-500 focus:outline-none">
+                                    <p class="text-gray-500 text-sm mt-2">Accepted formats: JPG, PNG, BMP (Max size: 16MB)</p>
+                                </div>
+                                
+                                <button type="submit" id="uploadBtn" class="w-full bg-gradient-to-r from-green-500 to-green-600 text-white font-bold py-3 rounded-xl hover:shadow-lg transition-all flex items-center justify-center gap-2">
+                                    <span id="uploadSpinner" class="hidden">
+                                        <i class="bi bi-arrow-repeat animate-spin"></i>
+                                    </span>
+                                    <i class="bi bi-upload"></i>
+                                    Upload & Analyze Image
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Image Results (Hidden initially) -->
+                        <div id="imageResults" class="hidden mt-8">
+                            <div class="bg-white rounded-2xl border-4 border-green-500 overflow-hidden shadow-xl">
+                                <div class="bg-gradient-to-r from-green-500 to-green-600 text-white p-6">
+                                    <h5 class="text-2xl font-bold flex items-center gap-2">
+                                        <i class="bi bi-microscope"></i>
+                                        Cell Classification Results
+                                    </h5>
+                                </div>
+                                
+                                <div class="p-8">
+                                    <div class="bg-blue-50 border-2 border-blue-200 rounded-xl p-6 mb-6">
+                                        <h5 class="text-2xl font-bold text-blue-800 mb-2">
+                                            Detected Cell Type: <span id="cellType">Loading...</span>
+                                        </h5>
+                                        <p class="text-blue-700 text-lg">
+                                            <strong>Confidence:</strong> <span id="cellConfidence">0</span>%
+                                        </p>
+                                    </div>
+
+                                    <div class="mb-6">
+                                        <h6 class="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">
+                                            <i class="bi bi-graph-up text-pink-500"></i>
+                                            All Cell Type Probabilities
+                                        </h6>
+                                        <div id="cellProbabilities" class="space-y-3"></div>
+                                    </div>
+
+                                    <div class="mb-6">
+                                        <h6 class="text-lg font-bold text-gray-800 mb-3">Grad-CAM Heatmap</h6>
+                                        <img id="gradcamImage" src="" alt="Grad-CAM" class="w-full rounded-xl shadow-lg">
+                                    </div>
+
+                                    <a href="/download_report" class="block w-full bg-gradient-to-r from-pink-500 to-purple-500 text-white font-bold py-4 rounded-xl hover:shadow-lg transition-all text-center">
+                                        <i class="bi bi-file-earmark-pdf-fill"></i>
+                                        Download Complete Report
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    
+    <script>
+        function incrementValue(id, min, max) {
+            const input = document.getElementById(id);
+            let value = parseInt(input.value) || min;
+            if (value < max) {
+                input.value = value + 1;
+            }
+        }
+
+        function decrementValue(id, min, max) {
+            const input = document.getElementById(id);
+            let value = parseInt(input.value) || min;
+            if (value > min) {
+                input.value = value - 1;
+            }
+        }
+
+        document.getElementById('assessmentForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const analyzeBtn = document.getElementById('analyzeBtn');
+            const analyzeSpinner = document.getElementById('analyzeSpinner');
+            
+            analyzeBtn.disabled = true;
+            analyzeSpinner.classList.remove('hidden');
+            
+            const formData = new FormData(e.target);
+            
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.status === 'low_risk') {
+                    window.location.href = result.redirect;
+                } else if (result.status === 'high_risk') {
+                    const highRiskSection = document.getElementById('highRiskSection');
+                    const riskProbElement = document.getElementById('riskProbability');
+                    const shapPlotElement = document.getElementById('shapPlotHighRisk');
+                    
+                    if (highRiskSection) highRiskSection.classList.remove('hidden');
+                    if (riskProbElement) riskProbElement.textContent = (result.probability * 100).toFixed(2);
+                    if (shapPlotElement) shapPlotElement.src = 'data:image/png;base64,' + result.shap_plot;
+                    
+                    if (highRiskSection) {
+                        highRiskSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            } catch (error) {
+                alert('Error: ' + error.message);
+            } finally {
+                analyzeBtn.disabled = false;
+                analyzeSpinner.classList.add('hidden');
+            }
+        });
+
+        document.getElementById('imageUploadForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const uploadBtn = document.getElementById('uploadBtn');
+            const uploadSpinner = document.getElementById('uploadSpinner');
+            
+            uploadBtn.disabled = true;
+            uploadSpinner.classList.remove('hidden');
+            
+            const formData = new FormData(e.target);
+            
+            try {
+                const response = await fetch('/upload_image', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.status === 'success') {
+                    const imageResults = document.getElementById('imageResults');
+                    const cellTypeElement = document.getElementById('cellType');
+                    const cellConfidenceElement = document.getElementById('cellConfidence');
+                    const gradcamImageElement = document.getElementById('gradcamImage');
+                    const cellProbabilitiesElement = document.getElementById('cellProbabilities');
+                    
+                    if (imageResults) imageResults.classList.remove('hidden');
+                    if (cellTypeElement) cellTypeElement.textContent = result.cell_type || 'Unknown';
+                    if (cellConfidenceElement) cellConfidenceElement.textContent = (result.confidence || 0).toFixed(2);
+                    if (gradcamImageElement) gradcamImageElement.src = 'data:image/png;base64,' + result.gradcam;
+                    
+                    if (cellProbabilitiesElement && result.probabilities) {
+                        let probHTML = '';
+                        Object.entries(result.probabilities).forEach(([cellType, prob]) => {
+                            const percentage = (prob * 100).toFixed(2);
+                            probHTML += `
+                                <div>
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="font-semibold text-gray-700">${cellType}</span>
+                                        <span class="font-bold text-gray-800">${percentage}%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-gradient-to-r from-pink-500 to-purple-500 h-2 rounded-full transition-all" style="width: ${percentage}%"></div>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                        cellProbabilitiesElement.innerHTML = probHTML;
+                    }
+                    
+                    if (imageResults) {
+                        setTimeout(() => {
+                            imageResults.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }, 100);
+                    }
+                } else {
+                    alert('Error: ' + (result.error || 'Unknown error occurred'));
+                }
+            } catch (error) {
+                alert('Error: ' + error.message);
+            } finally {
+                uploadBtn.disabled = false;
+                uploadSpinner.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
